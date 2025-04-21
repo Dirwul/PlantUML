@@ -1,0 +1,36 @@
+@startuml
+class BackupManager {
+  -sourcePath: String
+  -destinationPath: String
+  -schedule: Schedule
+  +startBackup(): void
+}
+
+class SyncManager {
+  -localPath: String
+  -remotePath: String
+  -syncType: String
+  +startSync(): void
+}
+
+class Schedule {
+  -cronExpression: String
+  +getNextExecution(): Date
+}
+
+class Logger {
+  +info(String): void
+  +error(String): void
+}
+
+class NotificationService {
+  +sendNotification(String): void
+}
+
+User --> BackupManager
+User --> SyncManager
+BackupManager --> Schedule
+SyncManager --> Logger
+BackupManager --> Logger
+BackupManager --> NotificationService
+@enduml
